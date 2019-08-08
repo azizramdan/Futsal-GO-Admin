@@ -1,10 +1,13 @@
 package com.example.futsalgoadmin;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -17,8 +20,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.widget.TextView;
 
+import com.example.futsalgoadmin.ui.login.LoginActivity;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    SharedPreferences admin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,10 +40,10 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-        SharedPreferences user = this.getSharedPreferences("dataAdmin", Context.MODE_PRIVATE);
+        admin = this.getSharedPreferences("dataAdmin", Context.MODE_PRIVATE);
         View headerView = navigationView.getHeaderView(0);
         TextView email = headerView.findViewById(R.id.email);
-        email.setText(user.getString("email", "E-Mail"));
+        email.setText(admin.getString("email", "E-Mail"));
     }
 
     @Override
@@ -62,11 +68,42 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.edit_akun) {
 
         } else if (id == R.id.logout) {
+            logout();
 
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+    private void logout() {
+        new AlertDialog.Builder(this)
+                .setTitle("Logout")
+                .setMessage(
+                        "Apakah Anda yakin ingin keluar?")
+                .setIcon(
+                        android.R.drawable.ic_dialog_alert
+                )
+                .setPositiveButton(
+                        "Ya",
+                        new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog,
+                                                int which) {
+                                admin.edit().clear().commit();
+                                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                                finish();
+                            }
+                        })
+                .setNegativeButton(
+                        "Tidak",
+                        new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog,
+                                                int which) {
+                            }
+                        }).show();
     }
 }
