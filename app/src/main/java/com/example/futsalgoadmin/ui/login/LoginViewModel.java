@@ -3,12 +3,20 @@ package com.example.futsalgoadmin.ui.login;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
+import android.util.Log;
 import android.util.Patterns;
-
+import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.common.Priority;
+import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.JSONObjectRequestListener;
+import com.example.futsalgoadmin.Konfigurasi;
 import com.example.futsalgoadmin.data.LoginRepository;
-import com.example.futsalgoadmin.data.Result;
-import com.example.futsalgoadmin.data.model.LoggedInUser;
 import com.example.futsalgoadmin.R;
+import org.json.JSONException;
+import org.json.JSONObject;
+import static android.support.constraint.Constraints.TAG;
+import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
 
 public class LoginViewModel extends ViewModel {
 
@@ -29,15 +37,44 @@ public class LoginViewModel extends ViewModel {
     }
 
     public void login(String username, String password) {
-        // can be launched in a separate asynchronous job
-        Result<LoggedInUser> result = loginRepository.login(username, password);
-
-        if (result instanceof Result.Success) {
-            LoggedInUser data = ((Result.Success<LoggedInUser>) result).getData();
-            loginResult.setValue(new LoginResult(new LoggedInUserView(data.getDisplayName())));
-        } else {
-            loginResult.setValue(new LoginResult(R.string.login_failed));
-        }
+        AndroidNetworking.post(Konfigurasi.ADMIN)
+                .addBodyParameter("method", "login")
+                .addBodyParameter("email", username)
+                .addBodyParameter("password", password)
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        if(response.opt("status") == TRUE) {
+                            try {
+                                JSONObject data = response.getJSONObject("data");
+                                loginResult.setValue(
+                                        new LoginResult(
+                                                TRUE,
+                                                "",
+                                                data.optInt("id"),
+                                                data.optString("telp"),
+                                                data.optString("email"),
+                                                data.optString("bank"),
+                                                data.optString("nama_rekening"),
+                                                data.optString("no_rekening"),
+                                                data.optString("jam_buka"),
+                                                data.optString("jam_tutup")
+                                                ));
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        } else {
+                            loginResult.setValue(new LoginResult(FALSE, response.opt("msg").toString()));
+                        }
+                    }
+                    @Override
+                    public void onError(ANError error) {
+                        Log.d(TAG, "isi error " + error.getErrorBody());
+                        loginResult.setValue(new LoginResult(FALSE,"Login failed"));
+                    }
+                });
     }
 
     public void loginDataChanged(String username, String password) {
@@ -54,16 +91,13 @@ public class LoginViewModel extends ViewModel {
     private boolean isUserNameValid(String username) {
         if (username == null) {
             return false;
-        }
-        if (username.contains("@")) {
-            return Patterns.EMAIL_ADDRESS.matcher(username).matches();
         } else {
-            return !username.trim().isEmpty();
+            return Patterns.EMAIL_ADDRESS.matcher(username).matches();
         }
     }
 
     // A placeholder password validation check
     private boolean isPasswordValid(String password) {
-        return password != null && password.trim().length() > 5;
+        return password != null && password.trim().length() >= 5;
     }
 }
