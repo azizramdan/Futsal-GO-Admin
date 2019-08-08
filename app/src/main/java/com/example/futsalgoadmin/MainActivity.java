@@ -1,5 +1,7 @@
 package com.example.futsalgoadmin;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -13,6 +15,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -31,6 +34,10 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+        SharedPreferences user = this.getSharedPreferences("dataAdmin", Context.MODE_PRIVATE);
+        View headerView = navigationView.getHeaderView(0);
+        TextView email = headerView.findViewById(R.id.email);
+        email.setText(user.getString("email", "E-Mail"));
     }
 
     @Override
