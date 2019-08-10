@@ -17,7 +17,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-
 import com.example.futsalgoadmin.ui.login.LoginActivity;
 
 public class MainActivity extends AppCompatActivity
@@ -49,13 +48,6 @@ public class MainActivity extends AppCompatActivity
             callFragment(fragment);
         }
     }
-    private void callFragment(Fragment fragment) {
-        fragmentManager = getSupportFragmentManager();
-        fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-        fragmentManager.beginTransaction()
-                .replace(R.id.frame_container, fragment)
-                .commit();
-    }
 
     @Override
     public void onBackPressed() {
@@ -73,19 +65,28 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.beranda) {
-            // Handle the camera action
+            fragment = new BerandaMenu();
         } else if (id == R.id.lapangan_saya) {
 
         } else if (id == R.id.edit_akun) {
-
+            fragment = new EditAkunMenu();
         } else if (id == R.id.logout) {
             logout();
         }
-
+        callFragment(fragment);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    private void callFragment(Fragment fragment) {
+        fragmentManager = getSupportFragmentManager();
+        fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        fragmentManager.beginTransaction()
+                .replace(R.id.frame_container, fragment)
+                .commit();
+    }
+
     private void logout() {
         new AlertDialog.Builder(this)
                 .setTitle("Logout")
