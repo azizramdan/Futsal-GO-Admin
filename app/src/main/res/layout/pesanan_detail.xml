@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:layout_marginVertical="@dimen/activity_vertical_margin"
+    android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:id="@+id/svContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/id_pesanan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ID pesanan"
+                android:gravity="center_horizontal"
+                android:layout_marginBottom="15dp"
+                android:textSize="30sp"/>
+            <TextView
+                android:id="@+id/nama_lapangan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="nama_lapangan"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/waktu_pilih_tanggal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="waktu_pilih_tanggal"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/waktu_pilih_jam"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="waktu_pilih_jam"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/nama_pemesan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="nama_pemesan"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/telp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="telp"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="status"
+                android:textSize="18sp" />
+            <Button
+                android:id="@+id/sudah_bayar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Konfirmasi Sudah Bayar" />
+
+            <Button
+                android:id="@+id/batal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Batalkan Pesanan" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
