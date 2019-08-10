@@ -94,10 +94,7 @@ public class LapanganSayaTambah extends Fragment {
     private void berhasil() {
         progressDialog.dismiss();
         Toast.makeText(getActivity(), "Tambah lapangan berhasil!", Toast.LENGTH_LONG).show();
-        FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.frame_container, new LapanganSayaMenu())
-                .commit();
+        getActivity().getSupportFragmentManager().popBackStack();
     }
 
     private void gagal() {
