@@ -1,7 +1,5 @@
 package com.example.futsalgoadmin.ui.login;
 
-import android.support.annotation.Nullable;
-
 /**
  * Authentication result : success (user details) or error message.
  */

@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -24,8 +23,6 @@ import android.widget.Toast;
 import com.androidnetworking.AndroidNetworking;
 import com.example.futsalgoadmin.MainActivity;
 import com.example.futsalgoadmin.R;
-import com.example.futsalgoadmin.ui.login.LoginViewModel;
-import com.example.futsalgoadmin.ui.login.LoginViewModelFactory;
 
 public class LoginActivity extends AppCompatActivity {
 

@@ -5,19 +5,17 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AlertDialog;
-import android.view.View;
-import android.support.v4.view.GravityCompat;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.view.MenuItem;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import com.example.futsalgoadmin.ui.login.LoginActivity;
@@ -25,7 +23,8 @@ import com.example.futsalgoadmin.ui.login.LoginActivity;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     SharedPreferences admin;
-
+    Fragment fragment = null;
+    FragmentManager fragmentManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +43,18 @@ public class MainActivity extends AppCompatActivity
         View headerView = navigationView.getHeaderView(0);
         TextView email = headerView.findViewById(R.id.email);
         email.setText(admin.getString("email", "E-Mail"));
+
+        if (savedInstanceState == null) {
+            fragment = new BerandaMenu();
+            callFragment(fragment);
+        }
+    }
+    private void callFragment(Fragment fragment) {
+        fragmentManager = getSupportFragmentManager();
+        fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        fragmentManager.beginTransaction()
+                .replace(R.id.frame_container, fragment)
+                .commit();
     }
 
     @Override
@@ -69,7 +80,6 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.logout) {
             logout();
-
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
