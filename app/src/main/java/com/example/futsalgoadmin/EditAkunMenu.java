@@ -106,7 +106,7 @@ public class EditAkunMenu extends Fragment {
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         String date = hourOfDay + ":00" + ":00";
                         date = Konfigurasi.parseDate(date, "h:mm:ss", "hh:mm:ss");
-                        etJamBuka.setText(date);
+                        etJamTutup.setText(date);
                     }
                 }, hourOfDay, minute, DateFormat.is24HourFormat(getActivity()));
                 tpd.show();
