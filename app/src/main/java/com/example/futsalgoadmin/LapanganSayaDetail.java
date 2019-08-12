@@ -27,7 +27,7 @@ public class LapanganSayaDetail extends Fragment {
                              Bundle savedInstanceState) {
 
         view = (LinearLayout) inflater.inflate(R.layout.lapangan_saya_detail, container, false);
-        getActivity().setTitle("Detail Pemesanan");
+        getActivity().setTitle("Detail Lapangan");
 
         ImageView ivFoto = view.findViewById(R.id.foto);
         TextView tvNamaLapangan = view.findViewById(R.id.nama_lapangan);
