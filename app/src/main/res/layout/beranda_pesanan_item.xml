@@ -21,7 +21,6 @@
             android:text="id_pesanan"
             android:textSize="18sp"/>
 
-
         <TextView
             android:id="@+id/waktu_pilih_tanggal"
             android:layout_width="match_parent"
@@ -35,6 +34,12 @@
             android:text="waktu_pilih_jam"/>
         <TextView
             android:id="@+id/nama_pemesan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="nama_pemesan"/>
+
+        <TextView
+            android:id="@+id/status"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="nama_pemesan"/>

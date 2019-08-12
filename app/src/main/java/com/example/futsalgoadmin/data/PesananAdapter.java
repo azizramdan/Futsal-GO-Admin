@@ -39,6 +39,7 @@ public class PesananAdapter extends RecyclerView.Adapter<PesananAdapter.ViewHold
         holder.tvWaktuPilihTanggal.setText(data.getWaktuPilihTanggal());
         holder.tvWaktuPilihJam.setText(data.getWaktuPilihJam());
         holder.tvNamaPemesan.setText("Nama pemesan: " + data.getNamaPemesan());
+        holder.tvStatus.setText("Status: " + data.getStatus());
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,7 +72,7 @@ public class PesananAdapter extends RecyclerView.Adapter<PesananAdapter.ViewHold
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvIdPesanan, tvWaktuPilihTanggal, tvWaktuPilihJam, tvNamaPemesan;
+        TextView tvIdPesanan, tvWaktuPilihTanggal, tvWaktuPilihJam, tvNamaPemesan, tvStatus;
         CardView cardView;
 
         private ViewHolder(View itemView) {
@@ -80,6 +81,7 @@ public class PesananAdapter extends RecyclerView.Adapter<PesananAdapter.ViewHold
             tvWaktuPilihTanggal = itemView.findViewById(R.id.waktu_pilih_tanggal);
             tvWaktuPilihJam = itemView.findViewById(R.id.waktu_pilih_jam);
             tvNamaPemesan = itemView.findViewById(R.id.nama_pemesan);
+            tvStatus = itemView.findViewById(R.id.status);
             cardView = itemView.findViewById(R.id.cardView);
         }
 
