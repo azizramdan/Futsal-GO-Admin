@@ -13,6 +13,10 @@
             android:icon="@drawable/clipboard"
             android:title="Lapangan Saya" />
         <item
+            android:id="@+id/statistik"
+            android:icon="@drawable/clipboard"
+            android:title="Statistik" />
+        <item
             android:id="@+id/edit_akun"
             android:icon="@drawable/edit"
             android:title="Edit Akun" />
